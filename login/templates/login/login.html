@@ -4,16 +4,13 @@
 
 {% block content %}
 <div class="features">
-    <h1>{{ title }}</h1>
-    
+    <h1>{{ title }}</h1>    
     <form method="post">
         {% csrf_token %}
         {{ form.username }} <br>
         {{ form.password }} <br>
         <span>{{ error }}</span>
         <button class="btn btn-success" type="submit">Log In</button>
-        <!-- <input type="text" placeholder="Username" class="form-control"><br>
-        <input type="password" placeholder="Password" class="form-control"><br> -->
     </form>
 </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 from matplotlib import widgets
 from .models import Articles
-from django.forms import ModelForm, TextInput, PasswordInput
+from django.forms import ModelForm, TextInput, PasswordInput, EmailInput
 
 
 class ArticlesForm(ModelForm):
@@ -19,8 +19,8 @@ class ArticlesForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Password'
             }),
-            "mail": TextInput({
-                'type': 'text',
+            "mail": EmailInput({
+                'type': 'email',
                 'class': 'form-control',
                 'placeholder': 'Mail'
             })
