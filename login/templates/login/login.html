@@ -5,12 +5,15 @@
 {% block content %}
 <div class="features">
     <h1>{{ title }}</h1>    
-    <form method="post">
+    <form class="site-form" method="post">
         {% csrf_token %}
-        {{ form.username }} <br>
-        {{ form.password }} <br>
+        {{ form }}<br><br>
+        <!-- {{ form.username }} <br>
+        {{ form.password }} <br> -->
         <span>{{ error }}</span>
         <button class="btn btn-success" type="submit">Log In</button>
+        <button class="btn btn-warning" type="submit" formaction="/registration">Registration</button><br>
+        
     </form>
 </div>
 {% endblock %}

@@ -3,12 +3,20 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<aside>
+<aside>    
     <ul>
         <li></li>
         <li></li>
         <li></li>
-        <li></li>
+
     </ul>
 </aside>
+<div class="chat_class">
+    <h1>{{ title }}</h1>    
+    <form method="post">{% csrf_token %}
+        {{ form.text_area }}<br>
+        <button class="btn btn-warning" type="submit">Send</button><br>
+        <span>{{ error }}</span>
+    </form>
+</div>
 {% endblock %}

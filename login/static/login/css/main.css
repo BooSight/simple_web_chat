@@ -36,6 +36,16 @@ main .features {
 
 }
 
+main .chat_class{
+    float: left;
+    margin-left: 5%;
+}
+
+main .chat_class form{
+    float: none;
+    margin-bottom: 5;
+}
+
 form {
     margin-left: 35%;
     width: 300px;

@@ -5,12 +5,13 @@
 {% block content %}
 <div class="features">
     <h1>{{ title }}</h1>    
-    <form method="post">
+    <form class="site-form" action="/registration" method="post">
         {% csrf_token %}
-        {{ form.username }}<br>
+        {{ form }} <br><br>
+        <!-- {{ form.username }}<br>
         {{ form.password }}<br>
-        {{ form.mail }}<br>        
-        <button class="btn btn-warning" type="submit">Registration</button><br>
+        {{ form.mail }}<br>         -->
+        <button class="btn btn-warning" type="submit">Registration</button><br><br>
         <span>{{ error }}</span>
     </form>
 </div>

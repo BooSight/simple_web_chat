@@ -1,6 +1,8 @@
+from pyexpat import model
+from attr import fields
 from matplotlib import widgets
-from .models import Articles
-from django.forms import ModelForm, TextInput, PasswordInput, EmailInput
+from .models import Articles, Pub_chat
+from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, DateTimeField
 
 
 class ArticlesForm(ModelForm):
@@ -25,3 +27,28 @@ class ArticlesForm(ModelForm):
                 'placeholder': 'Mail'
             })
         }
+
+
+class Pub_chat_Form(ModelForm):
+    class Meta:
+        model = Pub_chat
+        fields = ['user_name', 'text_area', 'msg_date']
+
+        widgets = {
+            "user_name": TextInput({
+                'type': 'text',
+                'class': 'form-control',
+                'placeholder': 'Username'
+            }),
+            "text_area": TextInput({
+                'type': 'text',
+                'class': 'form-control',
+                'placeholder': 'Text'
+            }),
+            "msg_date": TextInput({
+                'type': 'datetime',# todo change type
+                'class': 'form-control'
+            }),
+        }
+
+
