@@ -2,21 +2,32 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+
 {% block content %}
 <aside>    
     <ul>
         <li></li>
         <li></li>
         <li></li>
-
+        <li></li>
     </ul>
 </aside>
 <div class="chat_class">
-    <h1>{{ title }}</h1>    
-    <form method="post">{% csrf_token %}
+    <h1>{{ title }}</h1> 
+    <nav>
+        <form class="logout-link" action="/logout_views" method="post">
+                {% csrf_token %}
+                <p class="usr">Logged in as : {{ user.username }}</p>
+                <button class="btn btn-success" type="submit">Logout</button>
+                
+        </form>
+    </nav>  
+     
+    <!-- <form method="post">
+        {% csrf_token %}
         {{ form.text_area }}<br>
         <button class="btn btn-warning" type="submit">Send</button><br>
         <span>{{ error }}</span>
-    </form>
+    </form> -->
 </div>
 {% endblock %}

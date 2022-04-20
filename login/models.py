@@ -1,6 +1,7 @@
 from tabnanny import verbose
 from django import forms
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Articles(models.Model):
@@ -19,7 +20,7 @@ class Articles(models.Model):
 class Pub_chat(models.Model):
     user_name = models.CharField('username', max_length=20)
     text_area = models.TextField('input_txt') 
-    msg_date = models.DateTimeField('date')
+    msg_date = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
         return self.user_name

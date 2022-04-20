@@ -37,19 +37,18 @@ main .features {
 }
 
 main .chat_class{
-    float: left;
-    margin-left: 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px 5px;
 }
 
-main .chat_class form{
-    float: none;
-    margin-bottom: 5;
+nav{
+    justify-self: end;
 }
 
 form {
     margin-left: 35%;
     width: 300px;
-    margin-top: 50px;
 }
 
 main aside {
@@ -71,4 +70,23 @@ main aside ul li {
     margin-left: -20px;
     background: #0cbad8;
     list-style: none;
+}
+
+.helptext, .helptext ul{
+    margin: 0 auto 20px;
+    color: #fff;
+    font-size: 0.9em;
+    display: block;
+}
+
+.errorlist li{
+    padding: 5px;
+    list-style-type: none;
+    border: 3px solid #ff5722;
+    color: #ff5722;
+    margin: 10px 0;
+}
+
+.errorlist {
+    padding: 0;
 }

@@ -1,9 +1,11 @@
-from click import pass_context
+# from click import pass_context
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpRequest
-from .models import Articles
+# from django.http import HttpResponse, HttpRequest
+# from requests import post
+# from .models import Articles
 from .forms import ArticlesForm, Pub_chat_Form
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout
 
 # Create your views here.
 
@@ -13,6 +15,8 @@ def index(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
+            user = form.get_user()
+            login(request, user)
             return redirect('/public_chat')
         # usr = request.POST.get('username')
         # pswd = request.POST.get('password')
@@ -44,7 +48,8 @@ def registration(request):
         form = UserCreationForm(request.POST)
         
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             return redirect('/public_chat')
         
 
@@ -57,6 +62,13 @@ def registration(request):
         # 'error': error
     }
     return render(request, 'login/registration.html', data)
+
+
+def logout_views(request):
+    if request.method == 'POST':
+        
+        logout(request)
+        return redirect('login')
 
 
 def public_chat(request):

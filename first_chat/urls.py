@@ -22,5 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
-    path('public_chat' , include('login.urls'))
+    path('public_chat' , include('login.urls')),
+    path('logout' , include('login.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
