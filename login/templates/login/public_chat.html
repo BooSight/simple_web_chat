@@ -4,7 +4,7 @@
 
 
 {% block content %}
-<aside>    
+<aside>
     <ul>
         <li></li>
         <li></li>
@@ -13,21 +13,67 @@
     </ul>
 </aside>
 <div class="chat_class">
-    <h1>{{ title }}</h1> 
+    <h1>{{ title }}</h1>
     <nav>
         <form class="logout-link" action="/logout_views" method="post">
-                {% csrf_token %}
-                <p class="usr">Logged in as : {{ user.username }}</p>
-                <button class="btn btn-success" type="submit">Logout</button>
-                
+            {% csrf_token %}
+            <p class="usr">Logged in as : {{ user.username }}</p>
+            <button class="btn btn-success" type="submit">Logout</button>
+
         </form>
-    </nav>  
-     
+    </nav>
+
     <!-- <form method="post">
         {% csrf_token %}
         {{ form.text_area }}<br>
         <button class="btn btn-warning" type="submit">Send</button><br>
         <span>{{ error }}</span>
     </form> -->
+    <div id="TextArea">
+
+    </div>
+
+    <br>
+    
+    <form id="post-form">
+        {% csrf_token %}
+        <input type="hidden" name="username" id="username" value="{{ user.username }}">
+        {{ form }}  <br>  
+        <input type="button" id="button" value="Send">
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // var today = new Date();
+        // var dd = String(today.getDate()).padStart(2, '0');
+        // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        // var yyyy = today.getFullYear();
+
+        // today = mm + '/' + dd + '/' + yyyy;
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()
+                }
+            })
+        });
+        $(document).ready(function () {
+            $("#button").click(function () {
+                $.post("/public_chat",
+                    {
+                        username: "{{ user.username }}",
+                        text: document.getElementById("id_text_area").value
+                        
+                    },
+                    function (data, status) {
+                        document.getElementById("message").value = data["mystring"];
+
+                    });
+            });
+        });
+
+    </script>
+
+
 </div>
 {% endblock %}

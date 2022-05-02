@@ -25,13 +25,12 @@ SECRET_KEY = 'django-insecure-w5hm1-7casa_2zr_x0yy4v5c6a09l#)u=on#h!^3^)0c(@+vw7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
     'login',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,7 +120,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / "/home/armen/Desktop/Django/simple_web_chat/login/static"
 ]
 
 # Default primary key field type

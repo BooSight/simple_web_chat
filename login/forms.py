@@ -32,7 +32,7 @@ class ArticlesForm(ModelForm):
 class Pub_chat_Form(ModelForm):
     class Meta:
         model = Pub_chat
-        fields = ['user_name', 'text_area', 'msg_date']
+        fields = ['text_area']
 
         widgets = {
             "user_name": TextInput({
@@ -46,7 +46,7 @@ class Pub_chat_Form(ModelForm):
                 'placeholder': 'Text'
             }),
             "msg_date": TextInput({
-                'type': 'datetime',# todo change type
+                'type': 'datetime',
                 'class': 'form-control'
             }),
         }
