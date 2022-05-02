@@ -1,13 +1,14 @@
 # from click import pass_context
 from django.shortcuts import render, redirect
 from tomlkit import datetime
-# from django.http import HttpResponse, HttpRequest
-# from requests import post
+from requests import post
 # from .models import Articles
 from .forms import ArticlesForm, Pub_chat_Form
+from .models import Pub_chat
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponse
+from django.core import serializers
 
 # Create your views here.
 
@@ -74,17 +75,18 @@ def logout_views(request):
 
 def public_chat(request):
     if (request.method == 'POST'):
-        form = Pub_chat_Form(request.POST)
-        print(request.POST["username"])
-        print(request.POST["text"])
+        form = Pub_chat(user_name=request.POST["username"], text_area=request.POST["text"])
+        
         data = {
+            # adminkayi mejic username u textarea
             'title': 'aa',
             'form': "bb",
         }
-
+        form.save()
+        form.cleaned_data
+            
         return JsonResponse(data)
 
-   
     else:
         username = request.GET.get('username')
         form = Pub_chat_Form()
@@ -97,4 +99,7 @@ def public_chat(request):
     
 
 
-   
+def public_chat_read(request):
+    if (request.method == 'POST'):
+        data = serializers.serialize('json',Pub_chat.objects.all())
+        return HttpResponse(data, content_type='application/json')

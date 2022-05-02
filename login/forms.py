@@ -46,6 +46,7 @@ class Pub_chat_Form(ModelForm):
                 'placeholder': 'Text'
             }),
             "msg_date": TextInput({
+                'id': 'id_msg_date',
                 'type': 'datetime',
                 'class': 'form-control'
             }),

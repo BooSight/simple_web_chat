@@ -29,16 +29,18 @@
         <button class="btn btn-warning" type="submit">Send</button><br>
         <span>{{ error }}</span>
     </form> -->
-    <div id="TextArea">
-
+    <div >
+        <textarea id="TextArea" name="story"rows="5" cols="33">
+            {{ aaa }}
+        </textarea>
     </div>
 
     <br>
-    
-    <form id="post-form">
+
+    <form id="post-form" method="post">
         {% csrf_token %}
         <input type="hidden" name="username" id="username" value="{{ user.username }}">
-        {{ form }}  <br>  
+        {{ form }} <br>
         <input type="button" id="button" value="Send">
     </form>
 
@@ -62,8 +64,9 @@
                 $.post("/public_chat",
                     {
                         username: "{{ user.username }}",
-                        text: document.getElementById("id_text_area").value
-                        
+                        text: document.getElementById("id_text_area").value,
+                        // SendDate:  document.getElementById("id_msg_date")
+
                     },
                     function (data, status) {
                         console.log(data)
@@ -73,6 +76,30 @@
             });
         });
 
+    </script>
+    <script language="javascript" type="text/javascript">
+        function fetchdata() {
+            $.ajax({
+                url: '/public_chat_read',
+                type: 'post',
+                success: function (data) {
+                    console.log(data);
+                    var res = "";
+                    for (var i = 0; i < data.length; i++){
+                        console.log('aaa')
+                        res += data[i].fields.user_name + "   ->   "+ data[i].fields.text_area + "\n";
+                        document.getElementById("TextArea").value = res;
+                    }
+                },
+                complete: function (data) {
+                    setTimeout(fetchdata, 3000);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            setTimeout(fetchdata, 3000);
+        });
     </script>
 
 
