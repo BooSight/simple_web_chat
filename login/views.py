@@ -75,36 +75,16 @@ def logout_views(request):
 def public_chat(request):
     if (request.method == 'POST'):
         form = Pub_chat_Form(request.POST)
-
+        print(request.POST["username"])
+        print(request.POST["text"])
         data = {
-            'title': 'Public Chat',
-            'form': form,
+            'title': 'aa',
+            'form': "bb",
         }
 
-        return render(request, 'login/public_chat.html', data)
-    # if (request.method == 'POST'):
-    #     username = request.POST.get('username')
-    #     text = request.POST.get('text')
-    #     date = request.POST.get('date')
-    #     # user, text, date 
-    #     print(username)
-    #     print(date)
-    #     print(text)
+        return JsonResponse(data)
 
-    #     form = Pub_chat_Form(request.POST)
-    #     if form.is_valid():
-            
-    #         return HttpResponseRedirect('/thanks/')
-    #     data = {
-    #         'title': 'Public Chat',
-    #         'form': form,
-    #         'username': username,
-    #         'input_txt': 'yugukg',
-    #         'date': datetime,
-    #     }
-
-
-    #     return JsonResponse({'mystring': "BAREV"})
+   
     else:
         username = request.GET.get('username')
         form = Pub_chat_Form()
