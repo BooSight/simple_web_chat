@@ -4,13 +4,14 @@
 
 
 {% block content %}
-<aside>
-    <ul>
+<aside >
+    <textarea id="all_users"></textarea>
+    <!-- <ul>
         <li></li>
         <li></li>
         <li></li>
         <li></li>
-    </ul>
+    </ul> -->
 </aside>
 <div class="chat_class">
     <h1>{{ title }}</h1>
@@ -83,16 +84,16 @@
                 url: '/public_chat_read',
                 type: 'post',
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                     var res = "";
                     for (var i = 0; i < data.length; i++){
-                        console.log('aaa')
+                        // console.log('aaa')
                         res += data[i].fields.user_name + "   ->   "+ data[i].fields.text_area + "\n";
                         document.getElementById("TextArea").value = res;
                     }
                 },
                 complete: function (data) {
-                    setTimeout(fetchdata, 3000);
+                    setTimeout(fetchdata, 5000);
                 }
             });
         }
@@ -101,6 +102,32 @@
             setTimeout(fetchdata, 3000);
         });
     </script>
+
+<script language="javascript" type="text/javascript">
+    function fetchdata_1() {
+        $.ajax({
+            url: '/public_chat_users',
+            type: 'post',
+            success: function (data_1) {
+                console.log(data_1.length);
+                
+                var res = "";
+                for (var i = 0; i < data_1.length; i++){
+                    console.log(data_1[i].fields.username)
+                    res += data_1[i].fields.username + "\n";
+                    document.getElementById("all_users").value = res;
+                }
+            },
+            complete: function (data_1) {
+                setTimeout(fetchdata_1, 5000);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        setTimeout(fetchdata_1, 3000);
+    });
+</script>
 
 
 </div>

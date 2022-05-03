@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -101,5 +102,17 @@ def public_chat(request):
 
 def public_chat_read(request):
     if (request.method == 'POST'):
+        # User = get_user_model()
+        # users = User.objects.all()
+        # print(users)
         data = serializers.serialize('json',Pub_chat.objects.all())
         return HttpResponse(data, content_type='application/json')
+
+    
+def public_chat_users(request):
+    if (request.method == 'POST'):
+        User = get_user_model()
+        # users = User.objects.all()
+        # print(users)
+        data_1 = serializers.serialize('json',User.objects.all())
+        return HttpResponse(data_1, content_type='application/json')
